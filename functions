@@ -1,0 +1,17 @@
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+
+local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local function setws(wsv)
+    humanoid.WalkSpeed = wsv
+end
+
+local function setjp(jpv)
+    humanoid.JumpPower = jpv
+end
+
+setws(100)
+setjp(300)
+-- functions!!!
