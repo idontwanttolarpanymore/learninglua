@@ -1,0 +1,9 @@
+local target = "6vqes"
+
+local localhrp = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+local targetPlayer = game.Players:FindFirstChild(target)
+local targethrp = targetPlayer.Character.HumanoidRootPart
+
+if targetPlayer and targetPlayer.Character and targethrp then
+    localhrp.CFrame = targethrp.CFrame
+end
