@@ -25,35 +25,70 @@ local tabz = {
 }
 
 
-local LeftGroupBox = tabz.Main:AddLeftGroupbox('Groupbox')
+local LeftGroupBox = tabz.Main:AddLeftGroupbox('Character')
 
-local yesno = false
+
+local wsEnabled = false
+local wsValue = 16
+local jpEnabled = false
+local jpValue = 50
 
 LeftGroupBox:AddToggle('ws ENABLE', {
     Text = 'enable/disable walkspeed',
-    Default = false, 
+    Default = false,
     Callback = function(Value)
-		if Value == true then
-			print("is true")
-			yesno = true
-		end
-
+        wsEnabled = Value 
+        if not Value then
+            hum.WalkSpeed = 16  
+        end
     end
 })
 
 LeftGroupBox:AddSlider('Ws slider', {
     Text = 'walkspeed:',
-    Default = 0,
+    Default = 16,
     Min = 0,
     Max = 1000,
     Rounding = 1,
     Compact = false,
-
     Callback = function(Value)
-        while yesno == true do
-			task.wait(0.2)
-			hum.WalkSpeed = Value
-		end
+        wsValue = Value
     end
 })
+
+LeftGroupBox:AddToggle('jp ENABLE', {
+    Text = 'enable/disable jump power',
+    Default = false,
+    Callback = function(Value)
+        jpenabled = Value 
+        if not Value then
+            hum.Jumppower = 50  
+        end
+    end
+})
+
+LeftGroupBox:AddSlider('jp slider', {
+    Text = 'jump power:',
+    Default = 50,
+    Min = 0,
+    Max = 1000,
+    Rounding = 1,
+    Compact = false,
+    Callback = function(Value)
+        jpValue = Value
+    end
+})
+
+
+task.spawn(function()
+    while true do
+        task.wait(0.1)
+        if wsEnabled then
+            hum.WalkSpeed = wsValue
+        end
+        if jpEnabled then
+            hum.JumpPower = jpValue
+        end
+    end
+end)
 
